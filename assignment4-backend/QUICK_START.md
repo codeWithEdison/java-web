@@ -9,6 +9,7 @@
 ## Create Database and Seed with Sample Data
 
 ### Simple Command:
+
 ```bash
 npm run seed
 ```
@@ -30,13 +31,16 @@ npm run db:reset
 ## What Gets Created
 
 ### Database:
+
 - **assignment4_db** (or name from DB_NAME in .env)
 
 ### Tables:
+
 - **categories** - id, name, description, created_at
 - **products** - id, name, price, description, category_id, created_at
 
 ### Sample Data:
+
 - **5 Categories**: Electronics, Clothing, Books, Food, Toys
 - **15 Products**: 3 products per category
 
@@ -54,6 +58,7 @@ curl http://localhost:3000/api/products
 ```
 
 Or visit in browser:
+
 - http://localhost:3000/api/categories
 - http://localhost:3000/api/products
 
@@ -74,4 +79,3 @@ DB_NAME=assignment4_db
 - To reseed, use `npm run db:reset` first
 - Database is also auto-created when you start the server
 - See `MYSQL_SETUP.md` for detailed setup instructions
-
