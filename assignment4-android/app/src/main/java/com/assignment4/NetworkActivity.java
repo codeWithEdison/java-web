@@ -2,6 +2,7 @@ package com.assignment4;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,34 +39,61 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_network);
+        try {
+            setContentView(R.layout.activity_network);
 
-        recyclerView = findViewById(R.id.recyclerViewProducts);
-        btnToggleForm = findViewById(R.id.btnToggleForm);
-        fabAddProduct = findViewById(R.id.fabAddProduct);
+            recyclerView = findViewById(R.id.recyclerViewProducts);
+            btnToggleForm = findViewById(R.id.btnToggleForm);
+            fabAddProduct = findViewById(R.id.fabAddProduct);
 
-        productList = new ArrayList<>();
-        adapter = new ProductAdapter(productList, this::showProductDetails);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+            if (recyclerView == null || btnToggleForm == null || fabAddProduct == null) {
+                Toast.makeText(this, "Layout error: Views not found", Toast.LENGTH_LONG).show();
+                finish();
+                return;
+            }
 
-        btnToggleForm.setOnClickListener(v -> toggleFormFragment());
-        fabAddProduct.setOnClickListener(v -> toggleFormFragment());
+            // Ensure RecyclerView is visible initially
+            recyclerView.setVisibility(View.VISIBLE);
+            
+            productList = new ArrayList<>();
+            adapter = new ProductAdapter(productList, this::showProductDetails);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        formFragment = (ProductFormFragment) fragmentManager.findFragmentById(R.id.fragmentContainer);
+            btnToggleForm.setOnClickListener(v -> toggleFormFragment());
+            fabAddProduct.setOnClickListener(v -> toggleFormFragment());
 
-        if (formFragment == null) {
-            formFragment = new ProductFormFragment();
-            formFragment.setProductCreatedListener(this);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            formFragment = (ProductFormFragment) fragmentManager.findFragmentById(R.id.fragmentContainer);
+
+            if (formFragment == null) {
+                formFragment = new ProductFormFragment();
+                formFragment.setProductCreatedListener(this);
+            }
+
+            // Load products - don't crash if network fails
+            try {
+                loadProducts();
+            } catch (Exception e) {
+                Toast.makeText(this, "Error loading products: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error initializing: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            finish();
         }
-
-        loadProducts();
     }
 
     private void toggleFormFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        FrameLayout fragmentContainer = findViewById(R.id.fragmentContainer);
+        
         if (!isFormVisible) {
+            // Show form - hide RecyclerView
+            recyclerView.setVisibility(View.GONE);
+            fragmentContainer.setVisibility(View.VISIBLE);
+            
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, formFragment)
                     .commit();
@@ -73,6 +101,10 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
             btnToggleForm.setText(getString(R.string.cancel));
             fabAddProduct.hide();
         } else {
+            // Hide form - show RecyclerView
+            fragmentContainer.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            
             fragmentManager.beginTransaction()
                     .remove(formFragment)
                     .commit();
