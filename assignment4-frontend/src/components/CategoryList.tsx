@@ -64,3 +64,4 @@ const CategoryList = ({ categories, onEdit, onDelete, loading }: CategoryListPro
 
 export default CategoryList;
 
+

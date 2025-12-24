@@ -16,3 +16,4 @@ echo "1. File -> Sync Project with Gradle Files"
 echo "2. Build -> Rebuild Project"
 echo "3. Run the app"
 
+

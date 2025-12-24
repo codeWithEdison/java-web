@@ -172,3 +172,4 @@ If you were using SQLite before:
 3. Run `npm run seed` to create MySQL database
 4. All data will be fresh (seed data)
 
+

@@ -132,3 +132,4 @@ Web app runs on `http://localhost:5173`
 
 This is an academic assignment project.
 
+

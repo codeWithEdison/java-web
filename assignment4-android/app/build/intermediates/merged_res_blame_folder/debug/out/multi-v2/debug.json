@@ -495,10 +495,10 @@
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",
-                        "startOffsets": "94",
+                        "startOffsets": "91",
                         "endLines": "8",
                         "endColumns": "12",
-                        "endOffsets": "459"
+                        "endOffsets": "451"
                     },
                     "to": {
                         "startLines": "6363",

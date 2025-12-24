@@ -178,3 +178,4 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
 
 export default ProductForm;
 
+

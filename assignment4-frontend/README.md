@@ -60,3 +60,4 @@ React + TypeScript + Tailwind CSS frontend application.
 - Professional blue/gray color scheme
 - Smooth transitions and hover effects
 
+
