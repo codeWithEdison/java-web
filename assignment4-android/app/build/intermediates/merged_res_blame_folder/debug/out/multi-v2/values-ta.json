@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.assignment4.app-mergeDebugResources-30:/values-ta/values-ta.xml",
+            "outputFile": "com.assignment4.app-mergeDebugResources-31:/values-ta/values-ta.xml",
             "map": [
                 {
                     "source": "C:\\Users\\edsnk\\.gradle\\caches\\9.0-milestone-1\\transforms\\4428070d35b5908e2590b1f7977b0c86\\transformed\\core-1.9.0\\res\\values-ta\\values-ta.xml",

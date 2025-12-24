@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="accent_orange">#FF9800</color>
+    <color name="background_light">#F5F5F5</color>
+    <color name="black">#FF000000</color>
+    <color name="bottom_nav_selected">#1976D2</color>
+    <color name="bottom_nav_unselected">#757575</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="gray_light">#E0E0E0</color>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_blue">#1976D2</color>
+    <color name="primary_green">#4CAF50</color>
+    <color name="primary_red">#D32F2F</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
     <string name="add_product">Add Product</string>
     <string name="app_name">Product Manager</string>
     <string name="cancel">Cancel</string>
@@ -8,11 +25,14 @@
     <string name="description">Description</string>
     <string name="error_network">Network error. Please check your connection.</string>
     <string name="error_server">Server error. Please try again later.</string>
+    <string name="image_url_hint">Image URL (Optional)</string>
+    <string name="image_url_label">Image URL</string>
     <string name="invalid_price">Please enter a valid price</string>
     <string name="loading">Loading...</string>
     <string name="open_network">Open Network Activity</string>
     <string name="price">Price</string>
     <string name="product_details">Product Details</string>
+    <string name="product_image">Product Image</string>
     <string name="product_name">Product Name</string>
     <string name="required_field">This field is required</string>
     <string name="select_category">Select a category</string>
@@ -20,8 +40,22 @@
     <string name="success_product_created">Product created successfully!</string>
     <style name="Theme.Assignment4" parent="Theme.MaterialComponents.Light.DarkActionBar">
         
-        <item name="colorPrimary">@android:color/holo_blue_dark</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_dark</item>
-        <item name="colorAccent">@android:color/holo_blue_bright</item>
+        <item name="colorPrimary">#1976D2</item>
+        <item name="colorPrimaryVariant">#1565C0</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        
+        
+        <item name="colorSecondary">#4CAF50</item>
+        <item name="colorSecondaryVariant">#388E3C</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        
+        
+        <item name="android:statusBarColor">@color/primary_blue</item>
+        
+        
+        <item name="android:colorBackground">@color/background_light</item>
+        
+        
+        <item name="colorAccent">#FF9800</item>
     </style>
 </resources>

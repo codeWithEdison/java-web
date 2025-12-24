@@ -23,6 +23,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
       name: row.name,
       price: parseFloat(row.price),
       description: row.description,
+      image_url: row.image_url,
       category_id: row.category_id,
       created_at: row.created_at,
       category: row.category_name ? {
@@ -79,6 +80,7 @@ export const getProductById = async (req: Request, res: Response) => {
       name: row.name,
       price: parseFloat(row.price),
       description: row.description,
+      image_url: row.image_url,
       category_id: row.category_id,
       created_at: row.created_at,
       category: row.category_name ? {
@@ -105,7 +107,7 @@ export const getProductById = async (req: Request, res: Response) => {
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const { name, price, description, category_id } = req.body;
+    const { name, price, description, image_url, category_id } = req.body;
     
     if (!name || price === undefined || !category_id) {
       const response: ApiResponse = {
@@ -135,8 +137,8 @@ export const createProduct = async (req: Request, res: Response) => {
     }
     
     const [result]: any = await db.query(
-      'INSERT INTO products (name, price, description, category_id) VALUES (?, ?, ?, ?)',
-      [name, price, description || null, category_id]
+      'INSERT INTO products (name, price, description, image_url, category_id) VALUES (?, ?, ?, ?, ?)',
+      [name, price, description || null, image_url || null, category_id]
     );
     
     const query = `
@@ -159,6 +161,7 @@ export const createProduct = async (req: Request, res: Response) => {
       name: row.name,
       price: parseFloat(row.price),
       description: row.description,
+      image_url: row.image_url,
       category_id: row.category_id,
       created_at: row.created_at,
       category: row.category_name ? {
@@ -187,7 +190,7 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { name, price, description, category_id } = req.body;
+    const { name, price, description, image_url, category_id } = req.body;
     
     if (!name || price === undefined || !category_id) {
       const response: ApiResponse = {
@@ -217,8 +220,8 @@ export const updateProduct = async (req: Request, res: Response) => {
     }
     
     const [result]: any = await db.query(
-      'UPDATE products SET name = ?, price = ?, description = ?, category_id = ? WHERE id = ?',
-      [name, price, description || null, category_id, id]
+      'UPDATE products SET name = ?, price = ?, description = ?, image_url = ?, category_id = ? WHERE id = ?',
+      [name, price, description || null, image_url || null, category_id, id]
     );
     
     if (result.affectedRows === 0) {
@@ -249,6 +252,7 @@ export const updateProduct = async (req: Request, res: Response) => {
       name: row.name,
       price: parseFloat(row.price),
       description: row.description,
+      image_url: row.image_url,
       category_id: row.category_id,
       created_at: row.created_at,
       category: row.category_name ? {

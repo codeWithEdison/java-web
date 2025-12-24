@@ -1,27 +1,49 @@
 package com.assignment4.utils;
 
+import android.content.Context;
+
 public class NetworkConfig {
-    // Change this to your computer's IP address when using tethering
-    // For Android Emulator, use: "10.0.2.2"
-    // For physical device, use your computer's IP (e.g., "192.168.1.100")
-    // private static final String BASE_URL = "http://10.0.2.2:3000/api";
+    // Default IP - can be changed by user in settings
+    private static final String DEFAULT_BASE_URL = "http://172.20.10.5:3000/api";
+    private static PreferenceManager preferenceManager;
 
-    // For physical device - Using your computer's IP
-    private static final String BASE_URL = "http://172.20.10.5:3000/api";
+    public static void init(Context context) {
+        if (preferenceManager == null) {
+            preferenceManager = new PreferenceManager(context.getApplicationContext());
+        }
+    }
 
+    public static String getBaseUrl(Context context) {
+        init(context);
+        return preferenceManager.getBaseUrl();
+    }
+
+    public static String getCategoriesUrl(Context context) {
+        return getBaseUrl(context) + "/categories";
+    }
+
+    public static String getProductsUrl(Context context) {
+        return getBaseUrl(context) + "/products";
+    }
+
+    public static String getProductUrl(Context context, int id) {
+        return getBaseUrl(context) + "/products/" + id;
+    }
+
+    // For backward compatibility
     public static String getBaseUrl() {
-        return BASE_URL;
+        return DEFAULT_BASE_URL;
     }
 
     public static String getCategoriesUrl() {
-        return BASE_URL + "/categories";
+        return DEFAULT_BASE_URL + "/categories";
     }
 
     public static String getProductsUrl() {
-        return BASE_URL + "/products";
+        return DEFAULT_BASE_URL + "/products";
     }
 
     public static String getProductUrl(int id) {
-        return BASE_URL + "/products/" + id;
+        return DEFAULT_BASE_URL + "/products/" + id;
     }
 }

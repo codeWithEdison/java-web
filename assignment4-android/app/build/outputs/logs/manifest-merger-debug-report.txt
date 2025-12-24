@@ -10,6 +10,7 @@ MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\edsnk\.gradl
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\7ff9ee7482a8dc9b9850645cff3f693b\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\f93687793c2eb5326d3c5fd3c777b4ea\transformed\jetified-viewpager2-1.1.0-beta02\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\154eaed12fbd552b29db153c1c617e68\transformed\recyclerview-1.3.2\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\2cd7bc36b1d08249d3097bd920f5fd4f\transformed\jetified-glide-4.15.1\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.fragment:fragment:1.6.2] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\b55d2d6b787b4b5b3c8141ec4ac9de5f\transformed\fragment-1.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.volley:volley:1.2.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\da880c82c70080a5f340c05a6378288f\transformed\jetified-volley-1.2.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity:1.8.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\75b4789667fbe09fad7b27d1bf513ac6\transformed\jetified-activity-1.8.0\AndroidManifest.xml:17:1-22:12
@@ -39,6 +40,8 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\edsnk\.gradle\
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\7c9a346f0829635f6b7062ccc39f44bb\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\b93a88693195e0643c98e731fc5adad0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\a1c67589005762ba442722aab9349172\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:17:1-55:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\23c7dff3fe68ee2135f53e0a25e68f93\transformed\jetified-gifdecoder-4.15.1\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\0e1eb1344606d8177feb5f4a9fb28773\transformed\exifinterface-1.3.3\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\837b61c9cc7410d5106975a5151fd797\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\c860d484550a1e9d6d1e79c260aea913\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\583aae820793e5e8767d99a926d8a12b\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
@@ -68,6 +71,8 @@ MERGED from [com.google.android.material:material:1.11.0] C:\Users\edsnk\.gradle
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\5a1d71a04bdc553bf688ba17ca70df95\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\277acb44cda5a039f8c9dd6e3f6ef4b6\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\277acb44cda5a039f8c9dd6e3f6ef4b6\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\2cd7bc36b1d08249d3097bd920f5fd4f\transformed\jetified-glide-4.15.1\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\2cd7bc36b1d08249d3097bd920f5fd4f\transformed\jetified-glide-4.15.1\AndroidManifest.xml:9:5-20
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\42a0b624719de7f264fd270db839c6e4\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\42a0b624719de7f264fd270db839c6e4\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\e34d7dddcc9e1d62667baef48d40d3b8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:23:5-33:19
@@ -78,6 +83,8 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ed
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\b93a88693195e0643c98e731fc5adad0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\a1c67589005762ba442722aab9349172\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:23:5-53:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\a1c67589005762ba442722aab9349172\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:23:5-53:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\23c7dff3fe68ee2135f53e0a25e68f93\transformed\jetified-gifdecoder-4.15.1\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\23c7dff3fe68ee2135f53e0a25e68f93\transformed\jetified-gifdecoder-4.15.1\AndroidManifest.xml:9:5-20
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\837b61c9cc7410d5106975a5151fd797\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\837b61c9cc7410d5106975a5151fd797\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
@@ -136,6 +143,8 @@ MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\edsnk\.gradle
 MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\f93687793c2eb5326d3c5fd3c777b4ea\transformed\jetified-viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
 MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\154eaed12fbd552b29db153c1c617e68\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\154eaed12fbd552b29db153c1c617e68\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\2cd7bc36b1d08249d3097bd920f5fd4f\transformed\jetified-glide-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\2cd7bc36b1d08249d3097bd920f5fd4f\transformed\jetified-glide-4.15.1\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.fragment:fragment:1.6.2] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\b55d2d6b787b4b5b3c8141ec4ac9de5f\transformed\fragment-1.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.6.2] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\b55d2d6b787b4b5b3c8141ec4ac9de5f\transformed\fragment-1.6.2\AndroidManifest.xml:20:5-44
 MERGED from [com.android.volley:volley:1.2.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\da880c82c70080a5f340c05a6378288f\transformed\jetified-volley-1.2.1\AndroidManifest.xml:5:5-43
@@ -194,6 +203,10 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ed
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\b93a88693195e0643c98e731fc5adad0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\a1c67589005762ba442722aab9349172\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\a1c67589005762ba442722aab9349172\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\23c7dff3fe68ee2135f53e0a25e68f93\transformed\jetified-gifdecoder-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\23c7dff3fe68ee2135f53e0a25e68f93\transformed\jetified-gifdecoder-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\0e1eb1344606d8177feb5f4a9fb28773\transformed\exifinterface-1.3.3\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\0e1eb1344606d8177feb5f4a9fb28773\transformed\exifinterface-1.3.3\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\837b61c9cc7410d5106975a5151fd797\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\837b61c9cc7410d5106975a5151fd797\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\edsnk\.gradle\caches\9.0-milestone-1\transforms\c860d484550a1e9d6d1e79c260aea913\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41

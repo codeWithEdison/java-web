@@ -10,6 +10,7 @@ export interface Product {
   name: string;
   price: number;
   description?: string;
+  image_url?: string;
   category_id: number;
   created_at?: string;
 }
@@ -33,6 +34,7 @@ export interface ProductFormData {
   name: string;
   price: string;
   description: string;
+  image_url?: string;
   category_id: string;
 }
 

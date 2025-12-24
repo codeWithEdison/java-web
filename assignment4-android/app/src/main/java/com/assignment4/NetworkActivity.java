@@ -54,9 +54,25 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
 
             // Ensure RecyclerView is visible initially
             recyclerView.setVisibility(View.VISIBLE);
-            
+
             productList = new ArrayList<>();
             adapter = new ProductAdapter(productList, this::showProductDetails);
+            adapter.setOnItemActionListener(new ProductAdapter.OnItemActionListener() {
+                @Override
+                public void onViewDetailClick(Product product) {
+                    showProductDetails(product);
+                }
+
+                @Override
+                public void onEditClick(Product product) {
+                    editProduct(product);
+                }
+
+                @Override
+                public void onDeleteClick(Product product) {
+                    confirmDeleteProduct(product);
+                }
+            });
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
 
@@ -88,12 +104,12 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
     private void toggleFormFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FrameLayout fragmentContainer = findViewById(R.id.fragmentContainer);
-        
+
         if (!isFormVisible) {
             // Show form - hide RecyclerView
             recyclerView.setVisibility(View.GONE);
             fragmentContainer.setVisibility(View.VISIBLE);
-            
+
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, formFragment)
                     .commit();
@@ -104,7 +120,10 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
             // Hide form - show RecyclerView
             fragmentContainer.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
-            
+
+            // Clear edit mode when closing form
+            formFragment.clearEditMode();
+
             fragmentManager.beginTransaction()
                     .remove(formFragment)
                     .commit();
@@ -138,8 +157,7 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
                         }
                         Toast.makeText(NetworkActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                     }
-                }
-        );
+                });
 
         VolleySingleton.getInstance(this).getRequestQueue().add(request);
     }
@@ -147,7 +165,7 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
     private void loadProductsFromObjectResponse(JSONObject response) {
         try {
             List<Product> products = new ArrayList<>();
-            
+
             if (response.has("success") && response.getBoolean("success")) {
                 if (response.has("data")) {
                     Object data = response.get("data");
@@ -162,7 +180,7 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
                     }
                 }
             }
-            
+
             productList.clear();
             productList.addAll(products);
             adapter.updateProducts(productList);
@@ -175,22 +193,67 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
     private void showProductDetails(Product product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.product_details));
-        
+
         String details = "Name: " + product.getName() + "\n\n" +
                 "Price: $" + String.format("%.2f", product.getPrice()) + "\n\n" +
                 "Category: " + (product.getCategory() != null ? product.getCategory().getName() : "N/A") + "\n\n";
-        
+
         if (product.getDescription() != null && !product.getDescription().isEmpty()) {
             details += "Description: " + product.getDescription() + "\n\n";
         }
-        
+
         if (product.getCreatedAt() != null) {
             details += "Created: " + product.getCreatedAt();
         }
-        
+
         builder.setMessage(details);
         builder.setPositiveButton(getString(R.string.close), null);
         builder.show();
+    }
+
+    private void editProduct(Product product) {
+        // Show form with product data
+        if (!isFormVisible) {
+            toggleFormFragment();
+        }
+        formFragment.setProductToEdit(product);
+    }
+
+    private void confirmDeleteProduct(Product product) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Product");
+        builder.setMessage("Are you sure you want to delete \"" + product.getName() + "\"?");
+        builder.setPositiveButton("Delete", (dialog, which) -> deleteProduct(product));
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    private void deleteProduct(Product product) {
+        String url = NetworkConfig.getProductUrl(product.getId());
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(NetworkActivity.this, "Product deleted successfully", Toast.LENGTH_SHORT).show();
+                        loadProducts();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String errorMessage = "Failed to delete product";
+                        if (error.networkResponse != null) {
+                            errorMessage = "Error: " + error.networkResponse.statusCode;
+                        }
+                        Toast.makeText(NetworkActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        VolleySingleton.getInstance(this).getRequestQueue().add(request);
     }
 
     @Override
@@ -201,4 +264,3 @@ public class NetworkActivity extends AppCompatActivity implements ProductFormFra
         }
     }
 }
-

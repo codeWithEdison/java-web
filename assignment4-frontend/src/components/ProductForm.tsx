@@ -14,6 +14,7 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
     name: '',
     price: '',
     description: '',
+    image_url: '',
     category_id: '',
   });
   const [error, setError] = useState<string>('');
@@ -24,6 +25,7 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
         name: product.name,
         price: product.price.toString(),
         description: product.description || '',
+        image_url: product.image_url || '',
         category_id: product.category_id.toString(),
       });
     } else {
@@ -31,6 +33,7 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
         name: '',
         price: '',
         description: '',
+        image_url: '',
         category_id: categories.length > 0 ? categories[0].id.toString() : '',
       });
     }
@@ -61,12 +64,14 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
         name: formData.name,
         price: parseFloat(formData.price),
         description: formData.description,
+        image_url: formData.image_url,
         category_id: parseInt(formData.category_id),
       });
       setFormData({
         name: '',
         price: '',
         description: '',
+        image_url: '',
         category_id: categories.length > 0 ? categories[0].id.toString() : '',
       });
     } catch (err: any) {
@@ -75,11 +80,7 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        {product ? 'Edit Product' : 'Create New Product'}
-      </h2>
-
+    <form onSubmit={handleSubmit}>
       {error && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
           {error}
@@ -140,6 +141,38 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
         </select>
       </div>
 
+      <div className="mb-4">
+        <label htmlFor="image_url" className="block text-sm font-medium text-gray-700 mb-2">
+          Image URL <span className="text-gray-400 text-xs">(Optional)</span>
+        </label>
+        <input
+          type="url"
+          id="image_url"
+          value={formData.image_url}
+          onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          placeholder="https://example.com/image.jpg"
+        />
+        <p className="mt-1 text-xs text-gray-500">
+          Paste a link to an image (e.g., from Unsplash, Imgur, etc.)
+        </p>
+        {formData.image_url && (
+          <div className="mt-3">
+            <p className="text-xs font-medium text-gray-700 mb-2">Preview:</p>
+            <img 
+              src={formData.image_url} 
+              alt="Preview" 
+              className="w-32 h-32 object-cover rounded-lg border-2 border-gray-200"
+              onError={(e) => {
+                e.currentTarget.src = '';
+                e.currentTarget.alt = 'Invalid image URL';
+                e.currentTarget.className = 'w-32 h-32 flex items-center justify-center bg-gray-100 rounded-lg border-2 border-red-300 text-red-500 text-xs';
+              }}
+            />
+          </div>
+        )}
+      </div>
+
       <div className="mb-6">
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
           Description
@@ -154,7 +187,14 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
         />
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 mt-6 pt-4 border-t border-gray-200">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="flex-1 px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+        >
+          Cancel
+        </button>
         <button
           type="submit"
           disabled={loading}
@@ -162,15 +202,6 @@ const ProductForm = ({ product, categories, onSubmit, onCancel, loading }: Produ
         >
           {loading ? 'Saving...' : product ? 'Update Product' : 'Create Product'}
         </button>
-        {product && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
-          >
-            Cancel
-          </button>
-        )}
       </div>
     </form>
   );

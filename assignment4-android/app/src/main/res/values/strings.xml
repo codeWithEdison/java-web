@@ -17,6 +17,9 @@
     <string name="select_category">Select a category</string>
     <string name="product_details">Product Details</string>
     <string name="close">Close</string>
+    <string name="product_image">Product Image</string>
+    <string name="image_url_hint">Image URL (Optional)</string>
+    <string name="image_url_label">Image URL</string>
 </resources>
 
 

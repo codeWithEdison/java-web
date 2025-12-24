@@ -8,6 +8,7 @@ public class Product {
     private String name;
     private double price;
     private String description;
+    private String imageUrl;
     private int categoryId;
     private String createdAt;
     private Category category;
@@ -15,11 +16,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, double price, String description, int categoryId, String createdAt) {
+    public Product(int id, String name, double price, String description, String imageUrl, int categoryId, String createdAt) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.imageUrl = imageUrl;
         this.categoryId = categoryId;
         this.createdAt = createdAt;
     }
@@ -43,6 +45,9 @@ public class Product {
         
         if (dataObj.has("description") && !dataObj.isNull("description")) {
             product.setDescription(dataObj.getString("description"));
+        }
+        if (dataObj.has("image_url") && !dataObj.isNull("image_url")) {
+            product.setImageUrl(dataObj.getString("image_url"));
         }
         if (dataObj.has("created_at") && !dataObj.isNull("created_at")) {
             product.setCreatedAt(dataObj.getString("created_at"));
@@ -73,6 +78,9 @@ public class Product {
         json.put("category_id", categoryId);
         if (description != null && !description.isEmpty()) {
             json.put("description", description);
+        }
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            json.put("image_url", imageUrl);
         }
         return json;
     }
@@ -108,6 +116,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getCategoryId() {

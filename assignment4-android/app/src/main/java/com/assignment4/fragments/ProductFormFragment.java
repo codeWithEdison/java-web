@@ -31,10 +31,13 @@ public class ProductFormFragment extends Fragment {
     private EditText editTextName;
     private EditText editTextPrice;
     private EditText editTextDescription;
+    private EditText editTextImageUrl;
     private Spinner spinnerCategory;
     private Button buttonSubmit;
     private List<Category> categories;
     private OnProductCreatedListener listener;
+    private Product productToEdit = null;
+    private boolean isEditMode = false;
 
     public interface OnProductCreatedListener {
         void onProductCreated();
@@ -44,27 +47,77 @@ public class ProductFormFragment extends Fragment {
         this.listener = listener;
     }
 
+    public void setProductToEdit(Product product) {
+        this.productToEdit = product;
+        this.isEditMode = true;
+        if (editTextName != null) {
+            populateFormWithProduct();
+        }
+    }
+
+    public void clearEditMode() {
+        this.productToEdit = null;
+        this.isEditMode = false;
+        if (buttonSubmit != null) {
+            buttonSubmit.setText(getString(R.string.submit));
+        }
+    }
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_form, container, false);
 
         editTextName = view.findViewById(R.id.editTextName);
         editTextPrice = view.findViewById(R.id.editTextPrice);
         editTextDescription = view.findViewById(R.id.editTextDescription);
+        editTextImageUrl = view.findViewById(R.id.editTextImageUrl);
         spinnerCategory = view.findViewById(R.id.spinnerCategory);
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
 
         categories = new ArrayList<>();
+        NetworkConfig.init(requireContext());
         loadCategories();
 
         buttonSubmit.setOnClickListener(v -> submitProduct());
 
+        // If we're in edit mode, populate the form
+        if (isEditMode && productToEdit != null) {
+            populateFormWithProduct();
+        }
+
         return view;
     }
 
+    private void populateFormWithProduct() {
+        if (productToEdit == null)
+            return;
+
+        editTextName.setText(productToEdit.getName());
+        editTextPrice.setText(String.valueOf(productToEdit.getPrice()));
+        if (productToEdit.getDescription() != null) {
+            editTextDescription.setText(productToEdit.getDescription());
+        }
+        if (productToEdit.getImageUrl() != null) {
+            editTextImageUrl.setText(productToEdit.getImageUrl());
+        }
+
+        // Set category spinner selection
+        if (productToEdit.getCategory() != null && categories != null) {
+            for (int i = 0; i < categories.size(); i++) {
+                if (categories.get(i).getId() == productToEdit.getCategory().getId()) {
+                    spinnerCategory.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+        buttonSubmit.setText("Update Product");
+    }
+
     private void loadCategories() {
-        String url = NetworkConfig.getCategoriesUrl();
+        String url = NetworkConfig.getCategoriesUrl(requireContext());
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -75,7 +128,7 @@ public class ProductFormFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             List<Category> categoryList = new ArrayList<>();
-                            
+
                             // Handle API response: { success: true, data: [...] }
                             if (response.has("success") && response.getBoolean("success")) {
                                 if (response.has("data") && response.get("data") instanceof JSONArray) {
@@ -87,21 +140,20 @@ public class ProductFormFragment extends Fragment {
                                     }
                                 }
                             }
-                            
+
                             categories.clear();
                             categories.addAll(categoryList);
-                            
+
                             ArrayAdapter<Category> adapter = new ArrayAdapter<>(
                                     requireContext(),
                                     android.R.layout.simple_spinner_item,
-                                    categories
-                            );
+                                    categories);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerCategory.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(requireContext(), 
-                                    "Error loading categories: " + e.getMessage(), 
+                            Toast.makeText(requireContext(),
+                                    "Error loading categories: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }
@@ -115,8 +167,7 @@ public class ProductFormFragment extends Fragment {
                         }
                         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
                     }
-                }
-        );
+                });
 
         VolleySingleton.getInstance(requireContext()).getRequestQueue().add(request);
     }
@@ -165,10 +216,21 @@ public class ProductFormFragment extends Fragment {
                 productJson.put("description", description);
             }
 
-            String url = NetworkConfig.getProductsUrl();
+            // Add image URL if provided
+            String imageUrl = editTextImageUrl.getText().toString().trim();
+            if (!imageUrl.isEmpty()) {
+                productJson.put("image_url", imageUrl);
+            }
+
+            // Determine if we're creating or updating
+            int method = isEditMode ? Request.Method.PUT : Request.Method.POST;
+            String url = isEditMode ? NetworkConfig.getProductUrl(requireContext(), productToEdit.getId())
+                    : NetworkConfig.getProductsUrl(requireContext());
+            String successMessage = isEditMode ? "Product updated successfully"
+                    : getString(R.string.success_product_created);
 
             JsonObjectRequest request = new JsonObjectRequest(
-                    Request.Method.POST,
+                    method,
                     url,
                     productJson,
                     new Response.Listener<JSONObject>() {
@@ -176,21 +238,23 @@ public class ProductFormFragment extends Fragment {
                         public void onResponse(JSONObject response) {
                             try {
                                 if (response.has("success") && response.getBoolean("success")) {
-                                    Toast.makeText(requireContext(), 
-                                            getString(R.string.success_product_created), 
+                                    Toast.makeText(requireContext(),
+                                            successMessage,
                                             Toast.LENGTH_SHORT).show();
-                                    
+
                                     // Clear form
                                     editTextName.setText("");
                                     editTextPrice.setText("");
                                     editTextDescription.setText("");
-                                    
+                                    clearEditMode();
+
                                     // Notify listener to refresh list
                                     if (listener != null) {
                                         listener.onProductCreated();
                                     }
                                 } else {
-                                    String message = "Failed to create product";
+                                    String message = isEditMode ? "Failed to update product"
+                                            : "Failed to create product";
                                     if (response.has("message")) {
                                         message = response.getString("message");
                                     }
@@ -198,8 +262,8 @@ public class ProductFormFragment extends Fragment {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(requireContext(), 
-                                        "Error: " + e.getMessage(), 
+                                Toast.makeText(requireContext(),
+                                        "Error: " + e.getMessage(),
                                         Toast.LENGTH_LONG).show();
                             }
                         }
@@ -215,8 +279,7 @@ public class ProductFormFragment extends Fragment {
                             }
                             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
                         }
-                    }
-            );
+                    });
 
             VolleySingleton.getInstance(requireContext()).getRequestQueue().add(request);
         } catch (JSONException e) {
@@ -225,4 +288,3 @@ public class ProductFormFragment extends Fragment {
         }
     }
 }
-

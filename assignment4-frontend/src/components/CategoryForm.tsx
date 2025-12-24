@@ -48,11 +48,7 @@ const CategoryForm = ({ category, onSubmit, onCancel, loading }: CategoryFormPro
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        {category ? 'Edit Category' : 'Create New Category'}
-      </h2>
-
+    <form onSubmit={handleSubmit}>
       {error && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
           {error}
@@ -88,7 +84,14 @@ const CategoryForm = ({ category, onSubmit, onCancel, loading }: CategoryFormPro
         />
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 mt-6 pt-4 border-t border-gray-200">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="flex-1 px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+        >
+          Cancel
+        </button>
         <button
           type="submit"
           disabled={loading}
@@ -96,15 +99,6 @@ const CategoryForm = ({ category, onSubmit, onCancel, loading }: CategoryFormPro
         >
           {loading ? 'Saving...' : category ? 'Update Category' : 'Create Category'}
         </button>
-        {category && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
-          >
-            Cancel
-          </button>
-        )}
       </div>
     </form>
   );
